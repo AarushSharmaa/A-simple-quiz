@@ -1,12 +1,14 @@
 
 // taking input from the user - readline takes input from user
 // importing readline-sync
+// storing it in a variable named readlinesync
+
 var readlineSync = require("readline-sync");
 
 // initialising score to 0
 var score = 0;
 
-// highscore database
+// highScores database
 var highScores = [
   {
     name: "Mukesh",
@@ -48,6 +50,7 @@ var questions = [{
   answer: "Yes"
 }];
 
+
 // taking input then displaying it
 function greetings() {
   var playerName = readlineSync.question("Hello. May I know your name? ");
@@ -56,25 +59,27 @@ function greetings() {
 }
 
 function play(question, answer) {
-  
+  // question is displayed to the user and demands an input
   var userAnswer = readlineSync.question(question);
 
-  if (userAnswer.toUpperCase() === answer.toUpperCase()) { // branching
-    console.log("right!");
+  // if answers match : increment score
+  if (userAnswer.toUpperCase() === answer.toUpperCase()) {
+    console.log(" Right ");
     score = score + 1;
-
+    
+  // else : decrement score
   } else {
-    console.log("wrong!");
+    console.log(" Wrong ");
 
   }
 
   console.log("current score: ", score);
-  console.log("-------------")
+  console.log("- - - - - - - - ")
 }
 
 // playing the quiz
 function game() {
-  // traversing over the questions database
+  // traversing over the questions database : it is an array of objects
   for (var i = 0; i < questions.length; i++) {
     var currentQuestion = questions[i];
     // passing the current question and answer to another function
@@ -89,12 +94,12 @@ function displayScores() {
 
   console.log("If your score is not updated, let me know : I will do the needful");
   console.log("Score History : ");
-  highScores.map(score => console.log(score.name, " : ", score.score))
+
+  // traversing over highScores database and displaying them all
+  highScores.map(score => console.log(score.name, " --> ", score.score))
 }
 
 
 greetings(); // calling the function to display welcome message
-
 game(); // calling the function to start the game 
-
 displayScores(); // calling the function to display final scores
